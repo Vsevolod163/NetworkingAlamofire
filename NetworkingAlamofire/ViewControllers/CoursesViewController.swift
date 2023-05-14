@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Alamofire
 
 protocol NewCourseViewControllerDelegate: AnyObject {
     func sendPostRequest(with data: Course)
@@ -15,6 +14,7 @@ protocol NewCourseViewControllerDelegate: AnyObject {
 final class CoursesViewController: UITableViewController {
     
     private var courses: [Course] = []
+    private let networkManager = NetworkManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,17 +30,15 @@ final class CoursesViewController: UITableViewController {
     }
     
     private func fetchCourses() {
-        AF.request(Link.coursesURL.url)
-            .validate()
-            .responseJSON { [weak self] dataResponse in
-                switch dataResponse.result {
-                case .success(let value):
-                    self?.courses = Course.getCourses(from: value)
-                    self?.tableView.reloadData()
-                case .failure(let error):
-                    print(error)
-                }
+        networkManager.fetchCourses(from: Link.coursesURL.url) { [weak self] result in
+            switch result {
+            case .success(let courses):
+                self?.courses = courses
+                self?.tableView.reloadData()
+            case .failure(let error):
+                print(error)
             }
+        }
     }
 }
 

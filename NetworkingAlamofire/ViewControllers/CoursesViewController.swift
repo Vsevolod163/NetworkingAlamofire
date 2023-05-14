@@ -29,7 +29,7 @@ final class CoursesViewController: UITableViewController {
     }
     
     private func fetchCourses() {
-        // TODO: - fetch courses
+        
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 enum Link {
     case coursesURL
@@ -24,15 +25,22 @@ enum Link {
     }
 }
 
-enum NetworkError: Error {
-    case invalidURL
-    case noData
-    case decodingError
-}
-
 final class NetworkManager {
     static var shared = NetworkManager()
     
     private init() {}
     
+    func fetchCourses(from url: URL, completion: @escaping(Result<[Course], AFError>) -> Void) {
+        AF.request(url)
+            .validate()
+            .responseJSON { dataResponse in
+                switch dataResponse.result {
+                case .success(let value):
+                    let courses = Course.getCourses(from: value)
+                    completion(.success(courses))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
 }

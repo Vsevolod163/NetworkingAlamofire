@@ -51,28 +51,7 @@ extension CoursesViewController {
 
         guard let cell = cell as? CourseCell else { return UITableViewCell() }
         let course = courses[indexPath.row]
-        cell.configure(with: course{ ({ (if let <modeler>
-                                         <id><#Unique identifier#></id>
-                                         <title><#Unique title#></title>
-                                         <purpose><#What this modeler does#></purpose>
-                                         
-                                         <production-system>
-                                         <rule-path><#Relative path to the CLIPS file#></rule-path>
-                                         </production-system>
-                                         
-                                         <output>
-                                         <schema-ref><#Output schema identifier#></schema-ref>
-                                         <required-input>
-                                         <schema-ref><#Schema to use as an input#></schema-ref>
-                                         </required-input>
-                                         </output>
-                                         </modeler> = <#optional#> {
-            <#statements#>
-        }) -> <#return type#> in
-            <#statements#>
-        }) -> <#return type#> in
-            <#statements#>
-        })
+        cell.configure(with: course)
         
         return cell
     }

@@ -11,13 +11,13 @@
         <!--Courses-->
         <scene sceneID="DWX-ei-5ro">
             <objects>
-                <tableViewController id="Jbf-Bc-WYd" sceneMemberID="viewController">
+                <tableViewController id="Jbf-Bc-WYd" customClass="CoursesViewController" customModule="NetworkingAlamofire" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="RdL-85-D8E">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="course" rowHeight="102" id="SVi-fF-4Py">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="course" rowHeight="102" id="SVi-fF-4Py" customClass="CourseCell" customModule="NetworkingAlamofire" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="375" height="102"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SVi-fF-4Py" id="S6K-Sg-TYz">
@@ -64,6 +64,12 @@
                                         <constraint firstItem="Owe-69-5Ke" firstAttribute="bottom" secondItem="S6K-Sg-TYz" secondAttribute="bottomMargin" id="t25-1Z-q15"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="courseImage" destination="nDX-po-89n" id="o5l-Ig-YJg"/>
+                                    <outlet property="courseNameLabel" destination="GV4-Un-vog" id="5ot-Js-8xw"/>
+                                    <outlet property="numberOfLessons" destination="9r2-tP-Bfd" id="Sz8-Vr-5of"/>
+                                    <outlet property="numberOfTests" destination="Owe-69-5Ke" id="ghr-rz-qGu"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -83,10 +89,10 @@
             </objects>
             <point key="canvasLocation" x="1091.25" y="-134.1549295774648"/>
         </scene>
-        <!--View Controller-->
+        <!--New Course View Controller-->
         <scene sceneID="c59-mV-dyG">
             <objects>
-                <viewController id="D2f-ed-Ywb" sceneMemberID="viewController">
+                <viewController id="D2f-ed-Ywb" customClass="NewCourseViewController" customModule="NetworkingAlamofire" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WPV-jp-jti">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -159,13 +165,26 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gzK-g1-a9G">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="8vo-yB-w65"/>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="p5t-m1-bhC"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="8vo-yB-w65">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="D2f-ed-Ywb" id="gsC-kL-Rft"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="p5t-m1-bhC">
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="D2f-ed-Ywb" id="Hr8-p9-UhC"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="courseTitleTF" destination="7w8-yg-zr1" id="d7i-op-h7i"/>
+                        <outlet property="numberOfLessonsTF" destination="f6R-Wh-mu7" id="bCs-5b-0Ya"/>
+                        <outlet property="numberOfTestsTF" destination="SsV-0V-D7W" id="GTm-88-o1p"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E70-uK-9nl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2664.8000000000002" y="-134.48275862068968"/>
+            <point key="canvasLocation" x="2564" y="-134"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7mN-VP-Fan">
@@ -199,7 +218,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lvj-fM-AjN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1932" y="-134"/>
+            <point key="canvasLocation" x="1826" y="-134"/>
         </scene>
     </scenes>
     <resources>

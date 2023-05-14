@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 protocol NewCourseViewControllerDelegate: AnyObject {
     func sendPostRequest(with data: Course)
@@ -29,7 +30,29 @@ final class CoursesViewController: UITableViewController {
     }
     
     private func fetchCourses() {
-        
+        AF.request(Link.coursesURL.url)
+            .validate()
+            .responseJSON { [weak self] dataResponse in
+                switch dataResponse.result {
+                case .success(let value):
+                    guard let coursesData = value as? [[String: Any]] else { return }
+                    
+                    for courseData in coursesData {
+                        let course = Course(
+                            name: courseData["name"] as? String ?? "",
+                            imageUrl: courseData["imageUrl"] as? String ?? "",
+                            numberOfLessons: courseData["number_of_lessons"] as? Int ?? 0,
+                            numberOfTests: courseData["number_of_tests"] as? Int ?? 0
+                        )
+                        
+                        self?.courses.append(course)
+                    }
+                    
+                    self?.tableView.reloadData()
+                case .failure(let error):
+                    print(error)
+                }
+            }
     }
 }
 

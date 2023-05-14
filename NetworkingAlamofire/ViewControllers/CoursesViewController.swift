@@ -49,6 +49,10 @@ extension CoursesViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "course", for: indexPath)
 
+        guard let cell = cell as? CourseCell else { return UITableViewCell() }
+        let course = courses[indexPath.row]
+        cell.configure(with: course)
+        
         return cell
     }
 }

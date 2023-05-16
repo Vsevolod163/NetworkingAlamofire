@@ -26,6 +26,7 @@ final class CoursesViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let navigationVC = segue.destination as? UINavigationController else { return }
         guard let newCourseVC = navigationVC.topViewController as? NewCourseViewController else { return }
+        
         newCourseVC.delegate = self
     }
     
